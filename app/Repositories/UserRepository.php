@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\Hash;
+
+class UserRepository{
+
+    protected $user;
+    
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+    public function getAll(){
+        $users = User::with('enrolledClasses.usertype')->get();
+                // ->map(function($user){
+                //     return[
+                //         'id' =>$user->id,
+                //         'email' =>$user->email,
+                //         'firstname'=> $user->firstname,
+                //         'lastname'=> $user->lastname,
+                //         'gender'=> $user->gender,
+                //         'phone'=> $user->phone,
+                //         'role'=> $user->role,
+                //     ];
+                // });
+        return $users;
+    }
+
+    public function store($request){
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'firstname' => $request->firstname,
+            'lastname'=> $request->lastname,
+            'gender'=> $request->gender,
+            'phone'=> $request->phone,
+            'role'=> $request->role
+        ]);
+
+        return $user;
+    }
+
+    public function delete($id){
+        try {
+            $user = User::find($id);
+            if($user){
+                $user->delete();
+                return $user;
+            }else{
+                return "notFound";
+            }
+        } catch (Exception $er) {
+            return $er->getMessage();
+        }
+    }
+}
+?>
