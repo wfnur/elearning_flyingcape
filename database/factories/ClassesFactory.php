@@ -16,6 +16,9 @@ class ClassesFactory extends Factory
      */
     public function definition()
     {
-        return [];
+        return [
+            "name"=>fake()->word(),
+            "description"=>fake()->sentence()
+        ];
     }
 }

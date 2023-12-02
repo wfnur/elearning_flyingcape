@@ -15,6 +15,10 @@ class UserService{
         return $this->userRepository->getAll();
     }
 
+    public function getUserByID($id){
+        return $this->userRepository->getUserByID($id);
+    }
+
     public function store($request){
         return $this->userRepository->store($request);
     }
@@ -22,6 +26,7 @@ class UserService{
     public function delete($id){
         return $this->userRepository->delete($id);
     }
+    
 }
 
 ?>

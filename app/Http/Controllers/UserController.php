@@ -22,9 +22,8 @@ class UserController extends Controller
 
     public function index(){
         try {
-            $results["Data"] = $this->userService->getAll();
-            $results["Status"] = "Success";
-            $results["StatusCode"] = 200;
+            $users = $this->userService->getAll();
+            return $users;
 
         } catch (Exception $e) {
             $results=[
@@ -32,14 +31,28 @@ class UserController extends Controller
                 'StatusCode' => 500,
                 'Data' =>$e->getMessage()
             ];
-        }        return $results;
+            return $results;
+        }        
+    }
+    public function getUserByID($id){
+        try {
+            $users = $this->userService->getUserByID($id);
+            return $users;
+
+        } catch (Exception $e) {
+            $results=[
+                'Status' => "Error",
+                'StatusCode' => 500,
+                'Data' =>$e->getMessage()
+            ];
+            return $results;
+        }        
     }
 
     public function store(Request $request){
         try {
-            $results["Data"] = $this->userService->store($request);
-            $results["Status"] = "Created";
-            $results["StatusCode"] = 201;
+            $users = $this->userService->store($request);
+            return $users;
 
         } catch (Exception $e) {
             $results=[
@@ -47,9 +60,8 @@ class UserController extends Controller
                 'StatusCode' => 500,
                 'Data' =>$e->getMessage()
             ];
+            return $results;
         }
-
-        return $results;
     }
 
     public function delete($id){

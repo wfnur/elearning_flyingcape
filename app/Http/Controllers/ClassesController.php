@@ -18,15 +18,12 @@ class ClassesController extends Controller
     public function index(Request $request){
         try {
             if ($request->has('name')) {
-                $results["Data"] = $this->classService->getClassbyName($request->input('name'));
+                $results = $this->classService->getClassbyName($request->input('name'));
             }
             else
             {
-                $results["Data"] = $this->classService->getAll();
+                $results = $this->classService->getAll();
             }
-            
-            $results["Status"] = "Success";
-            $results["StatusCode"] = 200;
 
         } catch (Exception $e) {
             $results=[
@@ -57,10 +54,7 @@ class ClassesController extends Controller
 
     public function store(Request $request){
         try {
-            $results["Data"] = $this->classService->store($request);
-            $results["Status"] = "Created";
-            $results["StatusCode"] = 201;
-
+            $results = $this->classService->store($request);
         } catch (Exception $e) {
             $results=[
                 'Status' => "Error",

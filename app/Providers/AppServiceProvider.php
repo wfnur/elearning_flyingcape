@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\User\UserService;
 use Illuminate\Support\ServiceProvider;
+use UserServiceImpelment;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**

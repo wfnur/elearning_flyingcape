@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/user',[UserController::class,'index']);
+Route::get('/user/{id}',[UserController::class,'getUserByID']);
 Route::post('/user/store',[UserController::class,'store']);
 Route::delete('/user/delete/{id}',[UserController::class,'delete']);
 Route::post('/user/enrollclass',[UserController::class,'enrollclass']);

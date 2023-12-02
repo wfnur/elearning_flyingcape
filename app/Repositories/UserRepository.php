@@ -17,24 +17,18 @@ class UserRepository{
 
     public function getAll(){
         $users = User::with('enrolledClasses.usertype')->get();
-                // ->map(function($user){
-                //     return[
-                //         'id' =>$user->id,
-                //         'email' =>$user->email,
-                //         'firstname'=> $user->firstname,
-                //         'lastname'=> $user->lastname,
-                //         'gender'=> $user->gender,
-                //         'phone'=> $user->phone,
-                //         'role'=> $user->role,
-                //     ];
-                // });
+        return $users;
+    }
+
+    public function getUserByID($id){
+        $users = User::with('enrolledClasses.usertype')->find($id);
         return $users;
     }
 
     public function store($request){
         $user = User::create([
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
             'firstname' => $request->firstname,
             'lastname'=> $request->lastname,
             'gender'=> $request->gender,
