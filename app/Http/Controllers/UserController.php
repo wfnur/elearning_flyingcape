@@ -34,6 +34,39 @@ class UserController extends Controller
             return $results;
         }        
     }
+
+    public function getEnrolledByID($id,$usertype){
+        try {
+            $users = $this->userService->getEnrolledClassByID($id,$usertype);
+            return $users;
+
+        } catch (Exception $e) {
+            $results=[
+                'Status' => "Error",
+                'StatusCode' => 500,
+                'Data' =>$e->getMessage()
+            ];
+            return $results;
+        }   
+        $data=[];
+        $users = $this->userService->getAll();
+        foreach($users as $value){
+            if(count($value["enrolled_classes"]) > 0){
+                foreach($value["enrolled_classes"] as $res){
+                    array_push($data,$res);
+                    if($res["usertype"] == "Student"){
+                        $newData = [
+                            'id' =>$value["id"],
+                            'usertype' =>$res["usertype"],
+                        ];
+                    }
+                }
+            }
+        }
+        return $data;
+        
+    }
+
     public function getUserByID($id){
         try {
             $users = $this->userService->getUserByID($id);

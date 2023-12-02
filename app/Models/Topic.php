@@ -11,7 +11,8 @@ class Topic extends Model
     protected $fillable = [
         'name',
         'description',
-        'class_id'
+        'class_id',
+        'createdby'
     ];
 
     public function class(){

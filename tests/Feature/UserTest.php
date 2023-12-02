@@ -21,9 +21,16 @@ class UserTest extends TestCase
         DB::delete("delete from users");
 
         $user = User::factory()->create();
+        $new = $user->toArray();
+        $newData["email"] = $new["email"];
+        $newData["firstname"] = $new["firstname"];
+        $newData["lastname"] = $new["lastname"];
+        $newData["gender"] = $new["gender"];
+        $newData["phone"] = $new["phone"];
+        $newData["enrolled_classes"] = [] ;
+        
         $response = $this->getJson('api/user');
-
-        $response->assertJson([$user->toArray()]);
+        $response->assertJson([$newData]);
     }
 
     public function test_store(){
@@ -53,5 +60,6 @@ class UserTest extends TestCase
 
     }
 
+    
     
 }

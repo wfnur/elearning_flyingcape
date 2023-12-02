@@ -18,15 +18,12 @@ class CommentController extends Controller
     public function index(Request $request){
         try {
             if ($request->has('idTopic')) {
-                $results["Data"] = $this->commentService->getCommentByTopic($request->input('idTopic'));
+                $results= $this->commentService->getCommentByTopic($request->input('idTopic'));
             }
             else
             {
-                $results["Data"] = $this->commentService->getAll();
+                $results = $this->commentService->getAll();
             }
-            
-            $results["Status"] = "Success";
-            $results["StatusCode"] = 200;
 
         } catch (Exception $e) {
             $results=[
@@ -42,10 +39,8 @@ class CommentController extends Controller
     
     public function store(Request $request){
         try {
-            $results["Data"] = $this->commentService->store($request);
-            $results["Status"] = "Created";
-            $results["StatusCode"] = 201;
-
+            $results= $this->commentService->store($request);
+           
         } catch (Exception $e) {
             $results=[
                 'Status' => "Error",

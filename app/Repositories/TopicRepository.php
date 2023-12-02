@@ -37,6 +37,7 @@ class TopicRepository{
             'name' => $request->name,
             'description' => $request->description,
             'class_id' => $request->class_id,
+            'created_by' => $request->createdby
         ]);
 
         return $topic;

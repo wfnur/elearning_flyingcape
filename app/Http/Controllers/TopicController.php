@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
+use App\Models\Topic;
+use App\Models\User;
 use App\Services\TopicService;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,17 +19,16 @@ class TopicController extends Controller
     }
 
     public function index(Request $request){
+               
         try {
             if ($request->has('name')) {
-                $results["Data"] = $this->topicService->getTopicByName($request->input('name'));
+                $results = $this->topicService->getTopicByName($request->input('name'));
             }
             else
             {
-                $results["Data"] = $this->topicService->getAll();
+                $results = $this->topicService->getAll();
             }
             
-            $results["Status"] = "Success";
-            $results["StatusCode"] = 200;
 
         } catch (Exception $e) {
             $results=[
@@ -57,9 +59,7 @@ class TopicController extends Controller
     
     public function store(Request $request){
         try {
-            $results["Data"] = $this->topicService->store($request);
-            $results["Status"] = "Created";
-            $results["StatusCode"] = 201;
+            $results = $this->topicService->store($request);
 
         } catch (Exception $e) {
             $results=[
