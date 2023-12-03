@@ -1,0 +1,6 @@
+To use Test Unit, please follow the sequence of tests:
+1. userTest
+2. ClassTest
+3. EnrollTest
+4. TopicTest
+5. CommentTest
